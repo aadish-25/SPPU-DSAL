@@ -36,8 +36,9 @@ def checkSize(set3):
     return
 
 def iterateSet(set3):
-    for i in range(0, len(set3)):
-        print(i, " ")
+    for ele in set3:
+        print(ele)
+    # return iter(set3)
     return
 
 def createSet(set3):
@@ -47,8 +48,53 @@ def createSet(set3):
         insertElement(ele, set3)
     return
 
+def intersectSet(set1, set2):
+    intersect = []
+    for ele in set1:
+        if ele in set2:
+            intersect.append(ele)
+    return intersect
 
+def unionSet(set1, set2):
+    union = []
+    for ele in set1:
+        union.append(ele)
+    for ele in set2:
+        if ele not in union:
+            union.append(ele)
+    return union
 
+def differenceSet(set1, set2):
+    # set1 - set2
+    difference = []
+    for ele in set1:
+        if ele not in set2:
+            difference.append(ele)
+    return difference
+
+def checkSubset(set1, set2):
+    if(set1 == set2):
+        print("Both sets are subsets of each other")
+        return
+    else:
+        count1 = 0
+        count2 = 0
+        for ele in set1:
+            if ele in set2:
+                count1+=1
+        if len(set2) == count1:
+            print("Set 2 is a subset of Set 1")
+            return
+
+        for ele in set2:
+            if ele in set1:
+                count2+=1
+        if len(set1) == count2:
+            print("Set 1 is a subset of Set 2")
+            return
+        
+    print("No set is a subset of each other")
+    return
 
 def main():
     while True:
@@ -69,7 +115,7 @@ def main():
 
         if choice == "1":
             addNum = int(input("Enter the number to add : "))
-            insertElement(addNum)
+            insertElement(addNum, set1)
 
         elif choice == "2":
             removeNum = int(input("Enter the number to remove : "))
@@ -78,6 +124,7 @@ def main():
         elif choice == "3":
             checkNum = int(input("Enter element to be checked if the set contains it"))
             contains = containElement(checkNum)
+
             if contains == True:
                 print("Number exists in the set")
             else:
@@ -94,16 +141,34 @@ def main():
             createSet(set2)
 
         elif choice == "7":
-            print("Intersection operation selected.")
+            intersectingElements = intersectSet(set1, set2)
+            print(intersectingElements)
+
         elif choice == "8":
-            print("Union operation selected.")
+            unionElements = unionSet(set1, set2)
+            print(unionElements)
+
         elif choice == "9":
-            print("Difference operation selected.")
+            print("Difference between two sets : ")
+            print("1. A - B")
+            print("2. B - A")
+            choice = int(input())
+
+            if(choice == 1):
+                print("The difference A - B is : ",differenceSet(set1, set2))
+            elif(choice == 2):
+                print("The difference B - A is : ", differenceSet(set2, set1))
+            else:
+                print("Invalid Choice")
+                continue
+
         elif choice == "10":
-            print("Subset check selected.")
+            checkSubset(set1, set2)
+
         elif choice == "0":
             print("Exiting program.")
             break
+
         else:
             print("Invalid choice. Please try again.")
 
