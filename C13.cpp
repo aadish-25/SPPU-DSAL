@@ -5,12 +5,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void DFS(int adjMatrix[5][5]){
+void DFS(int adjMatrix[5][5], int start, int visited[5]){
+    visited[start] = 1;
+    cout << start << " ";
 
+    for(int i=0; i<5; i++){
+        if(adjMatrix[start][i] == 1 && visited[i] == 0){
+            DFS(adjMatrix, i, visited);
+        }
+    }
     return;
 }
 
 void BFS(vector <int> adjList[5], int start){
+
+    // Space Complexity = O(V) -> Queue, visited array and the adj list : all take up V space
+    // Time Complexity = O(V) + O(2E) = O(V + E) 
+    // TC = O(V + E) for directed graph as each edge is chcekd only once
+
     queue <int> q;
     int visited[5] = {0};
     q.push(start);
@@ -37,12 +49,12 @@ int main(){
     int adjMatrix[5][5] = {0}; //2d array
     vector <int> adjList[5]; // array of size 5, where each slot is vector of int
 
-
-    
     cout << "The landmarks are : \n0 - Main Gate \n1 - Hostel \n2 - Library \n3 - Seminar Hall \n4 - Classroom" << endl;
     cout << "Enter between which places you want a route : (press any letter to exit)\n";
 
     int p, q;
+    // enter only a single letter to stop i.e x
+    // do not enter multiple letters like ab, pqrs, etc
     while(cin >> p >> q){
         if(p >= 0 && p < V && q>=0 && q < V){
             adjMatrix[p][q] = 1;
@@ -77,11 +89,12 @@ int main(){
     cin.clear();
     cin.ignore();
     int start;
-    cout << "Enter the starting point (0-5) : ";
+    cout << "Enter the starting point (0-4) : ";
     cin >> start;
 
     cout << "\nDFS using the Adjacency Matrix\n";
-    DFS(adjMatrix);
+    int visited[5] = {0};
+    DFS(adjMatrix, start, visited);
     cout << "\nBFS using the Adjacency List\n";
     BFS(adjList, start);
 }
