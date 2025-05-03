@@ -6,6 +6,11 @@
 using namespace std;
 
 void DFS(int adjMatrix[5][5], int start, int visited[5]){
+
+    // Space Complexity = O(V)
+    // Time Complexity = O(2E) the dfs runs for every neghbouring nodes, thus TC = summation of degress
+    // and that being equal to 2E
+
     visited[start] = 1;
     cout << start << " ";
 
@@ -95,6 +100,7 @@ int main(){
     cout << "\nDFS using the Adjacency Matrix\n";
     int visited[5] = {0};
     DFS(adjMatrix, start, visited);
+
     cout << "\nBFS using the Adjacency List\n";
     BFS(adjList, start);
 }
