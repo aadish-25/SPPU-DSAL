@@ -105,5 +105,4 @@ int main(){
     
     cout << "MST : ";
     primMST(V, costMatrix, start, visited);
-    // The BFS of the MST is being printed, draw the MST by hand and traverse it using BFS
 }
