@@ -59,6 +59,7 @@ void displayStudent(int roll){
             cout << "\nRoll no :" << r;
             cout << "\nDivision : " << d;
             cout << "\nAddress : " << a;
+            cout <<"\n";
             return;
         }
     }
@@ -66,6 +67,38 @@ void displayStudent(int roll){
         cout << "Student not found\n";
         return;
     }
+}
+
+void deleteStudent(int roll){
+    fstream f1("temp.txt", ios::out | ios::app);
+    fstream f2("student.txt", ios::in);
+
+    string r, n, d, a;
+    bool found = false;
+
+    while(getline(f2, r)&&getline(f2, n)&&getline(f2, d)&&getline(f2, a)){
+        if(r == to_string(roll)){
+            found = true;
+            cout << "Student deleted!!\n";
+            continue;
+        }
+        else{
+            f1 << r << endl; 
+            f1 << n << endl; 
+            f1 << d << endl; 
+            f1 << a << endl; 
+        }
+    }
+    if(!found){
+        cout << "Roll number not found!!\n";
+        return;
+    }
+
+    f1.close();
+    f2.close();
+
+    remove("student.txt");
+    rename("temp.txt", "student.txt");
 }
 
 int main(){
@@ -91,7 +124,7 @@ int main(){
         case 3:
             cout << "Enter Roll No to delete: ";
             cin >> roll;
-            // deleteStudent(roll);
+            deleteStudent(roll); 
             break;
         case 4:
             cout << "Exiting...\n";
