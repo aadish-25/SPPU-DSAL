@@ -13,7 +13,7 @@ void primMST(int V, int costMatrix[10][10], int start, int visited[]){
     int minCost = 0;
     int minCostEdge, minEdge;
     visited[start] = 1;
-    cout << start << " ";    
+    // cout << start << " ";    
 
     for(int count=1; count < V; count++){
         minCostEdge = 999999;  
@@ -41,7 +41,8 @@ void primMST(int V, int costMatrix[10][10], int start, int visited[]){
 
         minCost = minCost + costMatrix[start][minEdge];
         visited[minEdge] = 1;
-        cout << minEdge << " ";        
+        // cout << minEdge << " ";  
+        cout << "(" << start << "," << minEdge << ") ";      
         start = minEdge;
     }
 
