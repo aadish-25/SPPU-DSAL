@@ -10,8 +10,6 @@ using namespace std;
 
 void primMST(int V, int costMatrix[10][10], int start, int visited[]){
 
-    // One flaw : The algorithm right one only looks at the edges of the currently selected node (start), but it doesn't consider edges from already visited nodes that might have a lower cost.
-
     int minCost = 0;
     int minCostEdge, minEdge;
     visited[start] = 1;
@@ -26,6 +24,18 @@ void primMST(int V, int costMatrix[10][10], int start, int visited[]){
             if(costMatrix[start][i] < minCostEdge && costMatrix[start][i]!=0 && visited[i]==0){
               minCostEdge = costMatrix[start][i];
               minEdge = i;
+            }
+        }
+        
+        for(int i=0; i<V;i++){
+            if(visited[i] == 1){
+                for(int j=0; j<V; j++){
+                    if(visited[j] == 0 && costMatrix[i][j]!=0 && costMatrix[i][j] < minCostEdge){
+                        minEdge = j;
+                        start = i;
+                        minCostEdge = costMatrix[i][j];
+                    }
+                }
             }
         }
 
@@ -95,4 +105,5 @@ int main(){
     
     cout << "MST : ";
     primMST(V, costMatrix, start, visited);
+    // The BFS of the MST is being printed, draw the MST by hand and traverse it using BFS
 }
