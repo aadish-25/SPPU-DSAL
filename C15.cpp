@@ -13,12 +13,9 @@ void primMST(int V, int costMatrix[10][10], int start, int visited[]){
     int minCost = 0;
     int minCostEdge, minEdge;
     visited[start] = 1;
-    // cout << start << " ";    
 
     for(int count=1; count < V; count++){
-        minCostEdge = 999999;  
-        minEdge = INT_MAX; 
-
+        minCostEdge = 999999; 
 
         for(int i=0; i<V; i++){
             if(costMatrix[start][i] < minCostEdge && costMatrix[start][i]!=0 && visited[i]==0){
