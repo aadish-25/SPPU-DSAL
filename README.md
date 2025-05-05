@@ -49,8 +49,3 @@ Feel free to:
 **⭐ Star the repo if you find it useful!**  
 
 ---  
-
-This **README** is concise, structured, and highlights the key aspects of your repository. You can further customize it by adding:  
-- Sample I/O screenshots  
-- Detailed explanations for complex algorithms  
-- Links to related resources  
